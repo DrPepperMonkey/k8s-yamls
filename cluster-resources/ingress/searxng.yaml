@@ -1,11 +1,12 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: nginx-ingress
+  name: searxng-ingress
+  namespace: searxng
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
+    searxng.ingress.kubernetes.io/rewrite-target: /
 spec:
-  ingressClassName: nginx-example
+  ingressClassName: nginx
   rules:
   - http:
       paths:
@@ -13,7 +14,6 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: nginx-service
+            name: searxng-service
             port:
-              number: 80
-
+              number: 8080
