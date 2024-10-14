@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: searxng-deployment
+  namespace: searxng
   labels:
     app: searxng
 spec:
@@ -26,6 +27,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: searxng-service
+  namespace: searxng
 spec:
   selector:
     app.kubernetes.io/name: searxng
