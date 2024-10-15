@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: searxng-deployment
+  name: searxng
   namespace: searxng
   labels:
     app: searxng
@@ -19,7 +19,7 @@ spec:
       - name: searxng
         image: searxng
         ports:
-        - containerPort: 80
+        - containerPort: 8080
         
 ---
 
