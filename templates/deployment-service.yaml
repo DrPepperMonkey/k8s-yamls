@@ -1,34 +1,43 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx-deployment
+  name: appname # Name of the deployment
+  namespace: namespace # Name of the namespace
   labels:
-    app: nginx
+    app: appname # Name of your application
 spec:
-  replicas: 3
   selector:
     matchLabels:
-      app: nginx
+      app: appname # Name of your application
+  replicas: 1 # Number of replicas
   template:
     metadata:
       labels:
-        app: nginx
+        app: appname # Name of your application
     spec:
       containers:
-      - name: nginx
-        image: nginx:1.14.2
+      # Containers are the individual pieces of your application that you want
+      # to run.
+      - name: helloworld # Name of the container
+        image: helloworld:latest # The image you want to run
+        # resources:
+        #   limits:
+        #     memory: 512Mi
+        #     cpu: "1"
+        #   requests:
+        #     memory: 256Mi
+        #     cpu: "0.2"
         ports:
-        - containerPort: 80
+        # Ports are the ports that your application uses.
+        - containerPort: 8080 # The port that your application uses
         
 ---
 
 apiVersion: v1
 kind: Service
 metadata:
-  name: nginx-service
+  name:  servicename
+  namespace: namespace
 spec:
   selector:
-    app.kubernetes.io/name: nginx
-  ports:
-    - port: 80
-      targetPort: 80
+    app:  appname
