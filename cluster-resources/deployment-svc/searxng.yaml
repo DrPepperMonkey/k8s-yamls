@@ -1,36 +1,43 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: searxng
-  namespace: searxng
+  name: searxng # Name of the deployment
+  namespace: searxng # Name of the namespace
   labels:
-    app: searxng
+    app: searxng # Name of your application
 spec:
-  replicas: 1
   selector:
     matchLabels:
-      app: searxng
+      app: searxng # Name of your application
+  replicas: 1 # Number of replicas
   template:
     metadata:
       labels:
-        app: searxng
+        app: searxng # Name of your application
     spec:
       containers:
-      - name: searxng
-        image: searxng
+      # Containers are the individual pieces of your application that you want
+      # to run.
+      - name: searxng # Name of the container
+        image: searxng/searxng:latest # The image you want to run
+        # resources:
+        #   limits:
+        #     memory: 512Mi
+        #     cpu: "1"
+        #   requests:
+        #     memory: 256Mi
+        #     cpu: "0.2"
         ports:
-        - containerPort: 8080
+        # Ports are the ports that your application uses.
+        - containerPort: 8080 # The port that your application uses
         
 ---
 
 apiVersion: v1
 kind: Service
 metadata:
-  name: searxng-service
+  name:  searxng-svc
   namespace: searxng
 spec:
   selector:
-    app.kubernetes.io/name: searxng
-  ports:
-    - port: 8080
-      targetPort: 8080
+    app:  searxng
