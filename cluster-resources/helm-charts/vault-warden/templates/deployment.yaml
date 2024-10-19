@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vault-warden # Name of the deployment
+  namespace: vault-warden # Name of the namespace
+  labels:
+    app: vault-warden # Name of your application
+spec:
+  selector:
+    matchLabels:
+      app: vault-warden # Name of your application
+  replicas: 1 # Number of replicas
+  template:
+    metadata:
+      labels:
+        app: vault-warden # Name of your application
+    spec:
+      containers:
+      # Containers are the individual pieces of your application that you want
+      # to run.
+      - name: vault-warden # Name of the container
+        image: vaultwarden/server:latest # The image you want to run
+        # resources:
+        #   limits:
+        #     memory: 512Mi
+        #     cpu: "1"
+        #   requests:
+        #     memory: 256Mi
+        #     cpu: "0.2"
+        ports:
+        # Ports are the ports that your application uses.
+        - containerPort: 80 # The port that your application uses
