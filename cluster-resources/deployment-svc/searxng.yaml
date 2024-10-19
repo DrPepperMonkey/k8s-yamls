@@ -40,7 +40,8 @@ metadata:
   namespace: searxng
 spec:
   selector:
-    app:  searxng
+    matchLabels:
+      app:  searxng
   type:  ClusterIP
   ports:
   - name:  http
