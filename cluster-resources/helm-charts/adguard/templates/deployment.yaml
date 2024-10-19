@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: adguard # Name of the deployment
+  namespace: adguard # Name of the namespace
+  labels:
+    app: adguard # Name of your application
+spec:
+  selector:
+    matchLabels:
+      app: adguard # Name of your application
+  replicas: 1 # Number of replicas
+  template:
+    metadata:
+      labels:
+        app: adguard # Name of your application
+    spec:
+      containers:
+      # Containers are the individual pieces of your application that you want
+      # to run.
+      - name: adguard # Name of the container
+        image: adguard/adguardhome:latest # The image you want to run
+        # resources:
+        #   limits:
+        #     memory: 512Mi
+        #     cpu: "1"
+        #   requests:
+        #     memory: 256Mi
+        #     cpu: "0.2"
+        ports:
+        # Ports are the ports that your application uses.
+        - containerPort: 53 # The port that your application uses
+          containerPort: 67
+          containerPort: 68
+          containerPort: 80
+          containerPort: 443
+          containerPort: 3000
