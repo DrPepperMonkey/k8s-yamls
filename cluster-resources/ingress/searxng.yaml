@@ -8,13 +8,13 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: www.example.com
+  - host: searx.dpmcentral.com
     http:
       paths:
       - path: /
         pathType: Prefix
         backend:
           service:
-            name: searxng-service
+            name: searxng-svc
             port:
               number: 8080
