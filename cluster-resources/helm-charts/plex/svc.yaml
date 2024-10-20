@@ -6,7 +6,7 @@ metadata:
 spec:
   selector:
     app:  plex
-  type:  ClusterIP
+  type:  NodePort
   ports:
   - name:  http
     port:  32400
