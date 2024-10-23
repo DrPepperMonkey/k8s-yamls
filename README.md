@@ -6,10 +6,10 @@ node token: sudo cat /var/lib/rancher/k3s/server/node-token \
 node: curl -sfL https://get.k3s.io | K3S_URL=https://192.168.50.178:6443 K3S_TOKEN= K3S_NODE_NAME=potato sh -
 ## Helm Instructions
 ### Install Helm
-$ curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
-$ chmod 700 get_helm.sh
+$ curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 \
+$ chmod 700 get_helm.sh \
 $ ./get_helm.sh
 ### Configure Helm
-$ sudo su
+$ sudo su \
 $ export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
 ### Happy Helming
