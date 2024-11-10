@@ -4,9 +4,9 @@ version: "1.0"
 dependencies:
 - alias: ingress-controller 
   name: nginx-ingress-controller
-  version: "1.0"
+  version: "4.12.0-beta.0"
   repository: "https://kubernetes.github.io/ingress-nginx"
 - alias: nfs-provisioner
   name: nfs-subdir
-  version: "1.0"
+  version: "4.0.18"
   repository: "https://kubernetes-sigs.github.io/nfs-subdir-external-provisioner"
