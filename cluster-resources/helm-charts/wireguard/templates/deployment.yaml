@@ -1,1 +1,32 @@
-
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vpn # Name of the deployment
+  namespace: vpn # Name of the namespace
+  labels:
+    app: vpn # Name of your application
+spec:
+  selector:
+    matchLabels:
+      app: vpn # Name of your application
+  replicas: 1 # Number of replicas
+  template:
+    metadata:
+      labels:
+        app: vpn # Name of your application
+    spec:
+      containers:
+      # Containers are the individual pieces of your application that you want
+      # to run.
+      - name: vpn # Name of the container
+        image: lscr.io/linuxserver/wireguard:latest # The image you want to run
+        # resources:
+        #   limits:
+        #     memory: 512Mi
+        #     cpu: "1"
+        #   requests:
+        #     memory: 256Mi
+        #     cpu: "0.2"
+        ports:
+        # Ports are the ports that your application uses.
+        - containerPort: 51820 # The port that your application uses
