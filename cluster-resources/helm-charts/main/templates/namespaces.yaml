@@ -1,0 +1,42 @@
+apiVersion: 3.0
+kind: namespace
+metadata:
+  name: searxng
+  labels:
+    name: searxng
+---
+apiVersion: 3.0
+kind: namespace
+metadata:
+  name: adguard
+  labels:
+    name: adguard
+---
+apiVersion: 3.0
+kind: namespace
+metadata:
+  name: arr
+  labels:
+    name: arr
+---
+apiVersion: 3.0
+kind: namespace
+metadata:
+  name: rss
+  labels:
+    name: rss
+---
+apiVersion: 3.0
+kind: namespace
+metadata:
+  name: vault
+  labels:
+    name: vault
+---
+apiVersion: 3.0
+kind: namespace
+metadata:
+  name: vpn
+  labels:
+    name: vpn
+---
