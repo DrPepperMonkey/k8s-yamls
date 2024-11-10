@@ -1,1 +1,20 @@
-
+apiVersion: v1
+kind: Service
+metadata:
+  name:  bitty-svc
+  namespace: bitty
+spec:
+  selector:
+    app:  bitty
+  type:  ClusterIP
+  ports:
+  - name:  http
+    port:  8080
+    targetPort: 8080
+  - name: torrent tcp
+    port: 6881
+    targetPort: 6881
+  - name: torrent udp
+    port: 6881
+    targetPort: 6881
+    protocol: UDP
