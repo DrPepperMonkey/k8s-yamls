@@ -1,1 +1,20 @@
-
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: bitty-ingress
+  namespace: arr
+  annotations:
+    bitty.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: bitty.dpmcentral.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: bitty-svc
+            port:
+              number: 8080
