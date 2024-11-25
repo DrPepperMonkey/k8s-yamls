@@ -8,7 +8,7 @@ Agent: curl -sfL https://get.k3s.io | K3S_URL=https://10.0.0.16:6443 K3S_TOKEN= 
 ### Install Helm
 $ curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 \
 $ chmod 700 get_helm.sh \
-$ ./get_helm.sh \
+$ ./get_helm.sh 
 ### Uninstall Helm
 Server: $ /usr/local/bin/k3s-uninstall.sh \
 Agent: $  /usr/local/bin/k3s-agent-uninstall.sh
