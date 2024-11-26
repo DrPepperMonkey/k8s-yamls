@@ -16,3 +16,6 @@ $ ./get_helm.sh
 $ sudo su \
 $ export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
 ### Happy Helming
+## Useful Commmands
+$ sudo kubectl exec -it <pod-name> <container-name> -- /bin/bash \
+$ sudo kubectl 
