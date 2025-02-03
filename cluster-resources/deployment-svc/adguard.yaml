@@ -1,0 +1,71 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: adguard # Name of the deployment
+  namespace: adguard # Name of the namespace
+  labels:
+    app: adguard # Name of your application
+spec:
+  selector:
+    matchLabels:
+      app: adguard # Name of your application
+  replicas: 1 # Number of replicas
+  template:
+    metadata:
+      labels:
+        app: adguard # Name of your application
+    spec:
+      containers:
+      # Containers are the individual pieces of your application that you want
+      # to run.
+      - name: adguard # Name of the container
+        image: adguard/adguard:latest # The image you want to run
+        # resources:
+        #   limits:
+        #     memory: 512Mi
+        #     cpu: "1"
+        #   requests:
+        #     memory: 256Mi
+        #     cpu: "0.2"
+        ports:
+        # Ports are the ports that your application uses.
+        - containerPort: 80 # The port that your application uses
+        - containerPort: 3000 
+        
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name:  adguard-svc
+  namespace: adguard
+spec:
+  selector:
+    app:  adguard
+  type:  ClusterIP
+  ports:
+  - name:  http
+    port:  80
+    targetPort: 80
+  - name: setup
+    port: 3000
+    targetPort: 3000
+  - name: https-tcp
+    port: 443
+    targetPort: 443
+    protocol: TCP
+  - name: https-udp
+    port: 443
+    targetPort: 443
+    protocol: UDP
+  type: NodePort
+  ports:
+  - name: dns-tcp
+    port: 53
+    targetPort: 53
+    protocol: TCP
+  - name: dns-udp
+    port: 53
+    targetPort: 53
+    protocol: UDP
+  
