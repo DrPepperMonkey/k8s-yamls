@@ -34,8 +34,6 @@ kind: Ingress
 metadata:
   name: matrix-ingress
   namespace: ess
-  annotations:
-    qbittorrent.ingress.kubernetes.io/rewrite-target: /
 spec:
   ingressClassName: nginx
   rules:
