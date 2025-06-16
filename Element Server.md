@@ -28,6 +28,28 @@ From here I have tried disabling matrixAuthenticationService but it messes every
  tls: []
 ```
 9. The default ess ingress is bugged with this method so I had to create a new ingress without any of the paths from the previous ingress.
+```
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: matrix-ingress
+  namespace: ess
+  annotations:
+    qbittorrent.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: matrix.domain.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: ess-synapse
+            port:
+              number: 8008
+```
 # Current challenges
 1. MAS must be enabled for the server to run properly and I would like to disable it.
 2. I would like to enable user registration without email.
