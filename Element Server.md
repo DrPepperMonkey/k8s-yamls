@@ -20,8 +20,8 @@ synapse:
   ingress:
     host: matrix.domain.com
 ```
-This will set the default ingress controller to whichever you one you prefer with the className variable. 
-From here I have tried disabling matrixAuthenticationService but it messes everything up. You could also disable proxying in Cloudflare's DNS entries but I couldn't get the server to work when I did it that way. The issue may have been that I didn't setup any cert management. 
+This will set the default ingress controller to whichever one you prefer with the className variable. 
+From here I have tried disabling matrixAuthenticationService but it messes everything up. You could also disable proxying in Cloudflare's DNS entries instead of disabling TLS within the cluster but I couldn't get the server to work when I did it that way. The issue may have been that I didn't setup any cert management. 
 ```
 synapse:
   ingress:
