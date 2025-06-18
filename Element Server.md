@@ -22,7 +22,7 @@ services:
     environment:
       - TUNNEL_TOKEN=yourtoken
 ```
-12. Where it says tunnel token copy and past the command that Cloudflare gives you but leave out everything before '--token' and paste that in place of 'yourtoken'
+12. Where it says tunnel token copy and paste the command that Cloudflare gives you but leave out everything before '--token' and paste that in place of 'yourtoken'
 13. while still in the cloudflared folder run the command on ubuntu ```sudo docker-compose up -d ``` to start the service and run it in the background.
 
 ## ESS
@@ -74,6 +74,7 @@ You could also disable proxying in Cloudflare's DNS entries instead of disabling
 helm install ess -n ess oci://ghcr.io/element-hq/ess-helm/matrix-stack --version 25.6.1
 ```
 You can change the first 'ess' to be whatever you want. The second 'ess' is the namespace which is used to separate different cluster resources based on the project they pertain to. You must execute ``` sudo kubectl create namespace ess ``` if you want it in the ess namespace. Alternatively, you can take out '-n ess' if you just want to install ESS in the default namespace. 
+
 6. HAProxy within the cluster has some issues with this setup which I haven't diagnosed. You potentially do not need it at all but for now there is a fix that needs to be done. with the command ```sudo KUBE_EDITOR=nano kubectl edit ingress ess-synapse -n ess ``` change 
 ```
           service:
