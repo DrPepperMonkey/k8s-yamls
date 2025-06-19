@@ -38,8 +38,6 @@ elementWeb:
     host: chat.domain.com
 matrixAuthenticationService:
   enabled: false
-deploymentMarkers:
-  enabled: false
 matrixRTC:
   ingress:
     host: call.domain.com
@@ -48,7 +46,11 @@ synapse:
   ingress:
     host: matrix.domain.com
 ```
-This will set the default ingress controller to whichever one you prefer with the className variable. This also disables TLS, Matrix Authentication Service, and Deployment Markers which depends on MAS in some way. If you do not want to disable MAS then use a values.yaml file like this:
+This will set the default ingress controller to whichever one you prefer with the className variable. This also disables TLS and Matrix Authentication Service. 
+### IMPORTANT NOTE
+If you previously installed ESS with MAS enabled but wish to disable it, then you must delete the configmap and secret resources from the ess namespace and delete the ess namespace. Then recreate the ess namespace to reinstall the chart.
+
+If you do not want to disable MAS then use a values.yaml file like this:
 ```
 ingress:
   className: nginx
@@ -67,7 +69,7 @@ synapse:
   ingress:
     host: matrix.domain.com
 ```
-You could also disable proxying in Cloudflare's DNS entries instead of disabling TLS within the cluster but I couldn't get the server to work when I did it that way. The issue may have been that I didn't setup any cert management. 
+You could also disable proxying in Cloudflare's DNS entries instead of disabling TLS within the cluster but I couldn't get the server to work when I did it that way. The issue was probably that I didn't setup any cert management. 
 
 5. Install ESS from the ess-helm github or with this command:
 ```
@@ -75,35 +77,6 @@ helm install ess -n ess oci://ghcr.io/element-hq/ess-helm/matrix-stack --version
 ```
 You can change the first 'ess' to be whatever you want. The second 'ess' is the namespace which is used to separate different cluster resources based on the project they pertain to. You must execute ``` sudo kubectl create namespace ess ``` if you want it in the ess namespace. Alternatively, you can take out '-n ess' if you just want to install ESS in the default namespace. 
 
-6. HAProxy within the cluster has some issues with this setup which I haven't diagnosed. You potentially do not need it at all but for now there is a fix that needs to be done. with the command ```sudo KUBE_EDITOR=nano kubectl edit ingress ess-synapse -n ess ``` change 
-```
-          service:
-            name: ess-synapse
-            port:
-              name: some HAProxy thing
-        path: /
-        pathType: Prefix
-      - backend:
-          service:
-            name: ess-synapse
-            port:
-              name: some HAProxy thing
-```
-to
-```
-          service:
-            name: ess-synapse
-            port:
-              number: 8008
-        path: /
-        pathType: Prefix
-      - backend:
-          service:
-            name: ess-synapse
-            port:
-              number: 8009
-```
-I changed the HAProxy routing to instead be a specific port for the service and I also changed the path to be '/' instead of the stuff they had there I don't remember exactly what was in the path but I do remember making it blank. I'm not sure if 8009 is even necessary but it was listed in the service ports so sue me. 
 ## Bridges (WIP)
 1. So far I am looking into enabling app services via the values.yaml file with the appropriate configurations but if that fails I believe I can enable them via the 'additional' property.
 
