@@ -1,0 +1,2 @@
+i need a bash script that does the following commands: 
+sudo apt update​, sudo apt upgrade​, mkdir k8s​, cd k8s​, mkdir ess​, cd ess, curl -sfL https://get.k3s.io | sh -, curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3, chmod 700 get_helm.sh, ./get_helm.sh, sudo su, helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx, helm repo update, helm install nginx-ingress ingress-nginx/ingress-nginx​, 
