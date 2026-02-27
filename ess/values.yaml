@@ -33,7 +33,6 @@ matrixRTC:
     tlsEnabled: false
   sfu:
     useStunToDiscoverPublicIP: false
-    manualIP: "<your-public-ip>"
     exposedServices:
       turn:
         enabled: true
