@@ -1,0 +1,59 @@
+serverName: dpmcentral.com
+
+wellKnownDelegation:
+  enabled: true
+  ingress:
+    className: nginx
+    tlsEnabled: false
+    annotations: {}
+
+elementWeb:
+  ingress:
+    host: chat.dpmcentral.com
+    className: nginx
+    tlsEnabled: false
+
+elementAdmin:
+  enabled: true
+  ingress:
+    host: admin.dpmcentral.com
+    className: nginx
+    tlsEnabled: false
+
+matrixAuthenticationService:
+  enabled: false
+
+deploymentMarkers:
+  enabled: false
+
+matrixRTC:
+  ingress:
+    host: call.dpmcentral.com
+    className: nginx
+    tlsEnabled: false
+  sfu:
+    useStunToDiscoverPublicIP: false
+    manualIP: "<your-public-ip>"
+    exposedServices:
+      turn:
+        enabled: true
+        portType: NodePort
+        port: 31478
+      turnTLS:
+        enabled: true
+        portType: NodePort
+        port: 31443
+        domain: call.dpmcentral.com
+        tlsSecret: "call-dpmcentral-com-tls"
+
+synapse:
+  ingress:
+    host: matrix.dpmcentral.com
+    className: nginx
+    tlsEnabled: false
+  additional:
+    user-config.yaml:
+      config: |
+        enable_registration: true
+        enable_registration_without_verification: true
+        report_stats: false
