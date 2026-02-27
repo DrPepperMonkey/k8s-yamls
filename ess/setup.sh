@@ -31,7 +31,7 @@ echo "Public IP: ${public_ip}"
 # Deploy ESS matrix stack
 helm upgrade --install my-release oci://ghcr.io/element-hq/ess-helm/matrix-stack \
   --version 26.2.1 \
-  --values https://raw.githubusercontent.com/DrPepperMonkey/<repo>k8s-yamls/ess/values.yaml \
+  --values https://raw.githubusercontent.com/DrPepperMonkey/k8s-yamls/main/ess/values.yaml \
   --set matrixRTC.sfu.manualIP="${public_ip}" \
   --namespace ess \
   --create-namespace
