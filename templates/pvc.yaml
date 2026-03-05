@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: my-pvc-example
+  policy: :mustRun
+spec:
+  resources:
+    requests:
+      cpu: 0.5
+      memory: 1Gi
+  storageClass: Standard
+  size: 50Gi
+  accessModes:
+    - ReadWrite
